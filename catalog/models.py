@@ -8,6 +8,9 @@ class Team(models.Model):
     created_by = models.ForeignKey(User, related_name='created_tims', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile', on_delete=models.CASCADE)
@@ -47,6 +50,8 @@ class Lead(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('name', )
 
     def __str__(self):
         return self.name
@@ -60,6 +65,9 @@ class Client(models.Model):
     created_by = models.ForeignKey(User, related_name='leads', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('name', )
 
     def __str__(self):
         return self.name

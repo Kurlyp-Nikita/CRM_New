@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, login
-from .models import UserProfile, Lead, Client
+from .models import UserProfile, Lead, Client, Team
 from django.contrib.auth.decorators import login_required
 from .forms import AddleadForm, AddClientForm
 from django.contrib import messages
@@ -89,16 +89,20 @@ def add_lead(request):
         form = AddleadForm(request.POST)
 
         if form.is_valid():
+            # Получаем команду так же, как и в `add_client`
+            team = Team.objects.filter(created_by=request.user)[0]
             lead = form.save(commit=False)
             lead.created_by = request.user
+            lead.team = team
             lead.save()
-            messages.success(request, 'The lead was create.')
+            messages.success(request, 'The lead was created.')
             return redirect('leads_list')
     else:
         form = AddleadForm()
 
     data = {'form': form}
     return render(request, 'lead/add_lead.html', data)
+
 
 
 @login_required
@@ -156,8 +160,10 @@ def add_client(request):
         form = AddClientForm(request.POST)
 
         if form.is_valid():
+            team = Team.objects.filter(created_by=request.user)[0]
             client = form.save(commit=False)
             client.created_by = request.user
+            client.team = team
             client.save()
             messages.success(request, 'The lead was create.')
             return redirect('clients_list')
@@ -196,4 +202,6 @@ def clients_delete(request, id):
 
     messages.success(request, 'The lead was deleted.')
     return redirect('clients_list')
+
+
 
