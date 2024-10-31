@@ -18,6 +18,8 @@
             {% for lead in leads %}
                 <div class="text-leads">
                     <h3>{{ lead.name }}</h3>
+                    <p class="status">{{ lead.get_status_display }}</p>
+                    <p class="priority">{{ lead.get_priority_display }}</p>
                     <a href="{% url 'leads_detail' lead.id %}">Details</a>
                 </div>
             {% endfor %}
@@ -30,6 +32,8 @@
             {% for client in clients %}
                 <div class="text-leads">
                     <h3>{{ client.name }}</h3>
+                    <p class="status">{{ client.get_status_display }}</p>
+                    <p class="priority">{{ client.get_priority_display }}</p>
                     <a href="{% url 'clients_detail' client.id %}">Details</a>
                 </div>
             {% endfor %}
