@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'hom_leads.css' %}">
+    <link rel="stylesheet" href="{% static 'dasboard.css' %}">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+{% endblock %}
+
+
+{% block content %}
+    <h1>Dashboard</h1>
+
+<div class="head">
+    <div class="flex">
+        <div class="leads">
+            <h2>Newest Leads</h2>
+
+            {% for lead in leads %}
+                <div class="text-leads">
+                    <h3>{{ lead.name }}</h3>
+                    <a href="{% url 'leads_detail' lead.id %}">Details</a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="clients">
+            <h2>Newest Clients</h2>
+
+            {% for client in clients %}
+                <div class="text-leads">
+                    <h3>{{ client.name }}</h3>
+                    <a href="{% url 'clients_detail' client.id %}">Details</a>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

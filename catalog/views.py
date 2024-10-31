@@ -15,8 +15,18 @@ def about(request):
     return render(request, 'about.html')
 
 
+@login_required
 def dashboard(request):
-    return render(request, 'dasboard.html')
+    team = Team.objects.filter(created_by=request.user).first()
+    leads = Lead.objects.filter(team=team, converted_to_client=False).order_by('-created_at')[0:5]
+    clients = Client.objects.filter(team=team).order_by('-created_at')[0:5]
+
+    data = {
+        'leads': leads,
+        'clients': clients,
+    }
+
+    return render(request, 'dashboard.html', data)
 
 
 def signup(request):
@@ -90,7 +100,7 @@ def add_lead(request):
 
         if form.is_valid():
             # Получаем команду так же, как и в `add_client`
-            team = Team.objects.filter(created_by=request.user)[0]
+            team = Team.objects.filter(created_by=request.user).first()
             lead = form.save(commit=False)
             lead.created_by = request.user
             lead.team = team
@@ -124,11 +134,14 @@ def leads_list(request):
 @login_required
 def convert_to_client(request, id):
     lead = get_object_or_404(Lead, id=id)
+    team = Team.objects.filter(created_by=request.user).first()
+
     client = Client.objects.create(
         name=lead.name,
         email=lead.email,
         description=lead.description,
-        created_by=request.user
+        created_by=request.user,
+        team=team
     )
 
     lead.converted_to_client = True
@@ -160,7 +173,7 @@ def add_client(request):
         form = AddClientForm(request.POST)
 
         if form.is_valid():
-            team = Team.objects.filter(created_by=request.user)[0]
+            team = Team.objects.filter(created_by=request.user).first()
             client = form.save(commit=False)
             client.created_by = request.user
             client.team = team

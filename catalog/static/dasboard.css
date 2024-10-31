@@ -1,0 +1,66 @@
+/* Основной контейнер для заголовка и контента */
+.head {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Контейнер для двух таблиц */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.leads, .clients {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовки таблиц */
+.leads h2, .clients h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+/* Элементы списка */
+.text-leads {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s;
+}
+
+.text-leads:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Название лида/клиента */
+.text-leads h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+}
+
+/* Ссылка на детали */
+.text-leads a {
+    display: inline-block;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.text-leads a:hover {
+    color: #388E3C;
+    text-decoration: underline;
+}
+
+
