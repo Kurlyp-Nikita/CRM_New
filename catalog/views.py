@@ -196,3 +196,4 @@ def clients_delete(request, id):
 
     messages.success(request, 'The lead was deleted.')
     return redirect('clients_list')
+
