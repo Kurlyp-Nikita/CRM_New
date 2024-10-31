@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'hom_leads.css' %}">
+    <link rel="stylesheet" href="{% static 'leads_details.css' %}">
+    <title>{% block title %}{{ lead.name }}{% endblock %}</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="lead-card">
+    <h1>{{ lead.name }}</h1>
+
+    {% if lead.description %}
+        <p>Description</p>
+        <p class="value description">{{ lead.description }}</p>
+    {% endif %}
+
+    <p>Priority</p>
+    <p class="value">{{ lead.get_priority_display }}</p>
+
+    <p>Status</p>
+    <p class="value">{{ lead.get_status_display }}</p>
+
+    <p>Created at</p>
+    <p class="value">{{ lead.created_at }}</p>
+
+    <p>Modifed at</p>
+    <p class="value">{{ lead.modified_at }}</p>
+
+    <hr>
+    <a class="convert" href="{% url 'convert_lead' lead.id %}">Convert to client</a>
+    <a class="edit" href="{% url 'leads_edit' lead.id %}">Edit Lead</a>
+    <a class="delete" href="{% url 'leads_delete' lead.id %}">Delete</a>
+    <hr>
+
+    <a class="back" href="{% url 'leads_list' %}">Back to leads</a>
+</div>
+
+{% endblock %}

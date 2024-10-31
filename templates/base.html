@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'hom_leads.css' %}">
+{% endblock %}
+<body>
+
+    <nav class="navbar">
+        <div class="left">
+            <a href="{% url 'index' %}">CRM</a>
+        </div>
+        <ul class="right">
+            <li><a href="{% url 'about' %}">About</a></li>
+
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'leads_list' %}">Leads</a></li>
+                <li><a href="{% url 'clients_list' %}">Clients</a></li>
+                <li class="red"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Log in</a></li>
+                <li><a href="{% url 'signup' %}">Sign up</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+    {% if messages %}
+        <div>
+            {% for message in massages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="calan">
+        <p>Copyrigt (c) 2024 - Teal CRM</p>
+    </footer>
+
+</body>
+</html>
