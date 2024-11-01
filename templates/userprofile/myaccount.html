@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'myaccount.css' %}">
+    <title>{% block title %}My account{% endblock %}</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="account-container">
+    <h1>My account</h1>
+
+    <p>
+        <strong>Username: </strong>{{ request.user.username }}
+    </p>
+
+    <p>
+        <strong>Team: </strong>{{ team.name }}
+    </p>
+
+    <hr>
+
+    <a class="red" href="{% url 'logout' %}">Logout</a>
+</div>
+
+{% endblock %}
+

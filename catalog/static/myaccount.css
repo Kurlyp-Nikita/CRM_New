@@ -1,0 +1,62 @@
+/* Основной стиль для контейнера аккаунта */
+.account-container {
+    width: 60%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+/* Заголовок */
+.account-container h1 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Стиль для информации */
+.account-container p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.account-container p strong {
+    color: #1abc9c;
+}
+
+/* Горизонтальная линия */
+.account-container hr {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 15px 0;
+}
+
+/* Кнопка Logout */
+.account-container .red {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+}
+
+/* Hover-эффект для кнопки */
+.account-container .red:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(192, 57, 43, 0.6);
+}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Home{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'hom_leads.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
 {% endblock %}
 <body>
 
@@ -20,7 +20,7 @@
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                 <li><a href="{% url 'leads_list' %}">Leads</a></li>
                 <li><a href="{% url 'clients_list' %}">Clients</a></li>
-                <li class="red"><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="myacc"><a href="{% url 'myaccount' %}">My account</a></li>
             {% else %}
                 <li><a href="{% url 'login' %}">Log in</a></li>
                 <li><a href="{% url 'signup' %}">Sign up</a></li>

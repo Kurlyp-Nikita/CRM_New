@@ -16,6 +16,14 @@ def about(request):
 
 
 @login_required
+def myaccount(request):
+    team = Team.objects.filter(created_by=request.user).first()
+
+    data = {'team': team}
+    return render(request, 'userprofile/myaccount.html', data)
+
+
+@login_required
 def dashboard(request):
     team = Team.objects.filter(created_by=request.user).first()
     leads = Lead.objects.filter(team=team, converted_to_client=False).order_by('-created_at')[0:5]
@@ -35,7 +43,10 @@ def signup(request):
 
         if form.is_valid():
             user = form.save()
-            userprofile = UserProfile.objects.create(user=user)
+            UserProfile.objects.create(user=user)
+            team = Team.objects.create(name='The team name', created_by=request.user)
+            team.members.add(request.user)
+            team.save()
             return redirect('login')
     else:
         form = UserCreationForm()
