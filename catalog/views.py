@@ -42,11 +42,18 @@ def signup(request):
         form = UserCreationForm(request.POST)
 
         if form.is_valid():
+            # Сохраняем нового пользователя
             user = form.save()
+
+            # Создаем профиль пользователя
             UserProfile.objects.create(user=user)
-            team = Team.objects.create(name='The team name', created_by=request.user)
-            team.members.add(request.user)
+
+            # Создаем команду для нового пользователя
+            team = Team.objects.create(name='The team name', created_by=user)
+            team.members.add(user)
             team.save()
+
+            # Перенаправляем на страницу входа
             return redirect('login')
     else:
         form = UserCreationForm()
@@ -173,6 +180,7 @@ def edit_lead(request, id):
 
 @login_required
 def add_lead(request):
+    team = Team.objects.filter(created_by=request.user).first()
     if request.method == 'POST':
         form = AddleadForm(request.POST)
 
@@ -188,7 +196,10 @@ def add_lead(request):
     else:
         form = AddleadForm()
 
-    data = {'form': form}
+    data = {
+        'form': form,
+        'team': team
+    }
     return render(request, 'lead/add_lead.html', data)
 
 
@@ -247,6 +258,7 @@ def clients_detail(request, id):
 
 @login_required
 def add_client(request):
+    team = Team.objects.filter(created_by=request.user).first()
     if request.method == 'POST':
         form = AddClientForm(request.POST)
 
@@ -261,7 +273,10 @@ def add_client(request):
     else:
         form = AddClientForm()
 
-    data = {'form': form}
+    data = {
+        'form': form,
+        'team': team,
+    }
     return render(request, 'clients/add_client.html', data)
 
 

@@ -10,12 +10,21 @@
 {% block content %}
     <h1>Add Client</h1>
 
-    <form method="post" action=".">
-        {% csrf_token %}
+    {{ team.plan.max_clients }} - {{ team.clients.all|length }}
 
-        {{ form.as_p }}
+    Num clients: {{ team.clients.all|length }}
+    {% if team.plan.max_leads > team.clients.all|length %}
+        <form method="post" action=".">
+            {% csrf_token %}
 
-        <button>Submit</button>
-    </form>
+            {{ form.as_p }}
+
+            <button>Submit</button>
+        </form>
+    {% else %}
+        <div>
+            <p>You have reached the limit</p>
+        </div>
+    {% endif %}
 
 {% endblock %}
