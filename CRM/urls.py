@@ -43,4 +43,10 @@ urlpatterns = [
     path('clients_detail<int:id>', views.clients_detail, name='clients_detail'),
     path('clients_delete/<int:id>', views.clients_delete, name='clients_delete'),
     path('clients_edit/<int:id>/', views.edit_client, name='clients_edit'),
+
+    path('teams_list', views.teams_list, name='teams_list'),
+    path('add-team/', views.add_team, name='addteam'),
+    path('teams_detail<int:id>', views.teams_detail, name='teams_detail'),
+    path('teams_delete/<int:id>/', views.teams_delete, name='teams_delete'),
+    path('team_edit/<int:id>/', views.edit_team, name='team_edit'),
 ]

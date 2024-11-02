@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, login
 from .models import UserProfile, Lead, Client, Team
 from django.contrib.auth.decorators import login_required
-from .forms import AddleadForm, AddClientForm
+from .forms import AddleadForm, AddClientForm, AddTeamForm
 from django.contrib import messages
 
 
@@ -53,6 +53,73 @@ def signup(request):
 
     data = {'form': form}
     return render(request, 'userprofile/signup.html', data)
+
+
+@login_required
+def edit_team(request, id):
+    team = get_object_or_404(Team, id=id)
+
+    if request.method == 'POST':
+        form = AddTeamForm(request.POST, instance=team)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'The changes was saved.')
+            return redirect('myaccount')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+
+    else:
+        form = AddTeamForm(instance=team)
+
+    data = {
+        'form': form,
+        'team': team,
+    }
+    return render(request, 'team/edit_team.html', data)
+
+
+@login_required
+def add_team(request):
+    if request.method == 'POST':
+        form = AddTeamForm(request.POST)
+
+        if form.is_valid():
+            team = form.save(commit=False)
+            team.created_by = request.user
+            team.save()
+            messages.success(request, 'The lead was created.')
+            return redirect('teams_list')
+    else:
+        form = AddTeamForm()
+
+    data = {'form': form}
+    return render(request, 'team/add_team.html', data)
+
+
+@login_required
+def teams_list(request):
+    teams = Team.objects.filter(created_by=request.user)
+
+    data = {'teams': teams}
+    return render(request, 'team/teams_list.html', data)
+
+
+@login_required
+def teams_detail(request, id):
+    team = Team.objects.get(id=id)
+
+    data = {'team': team}
+    return render(request, 'team/team_detail.html', data)
+
+
+@login_required
+def teams_delete(request, id):
+    team = Team.objects.get(id=id)
+    team.delete()
+
+    messages.success(request, 'The lead was deleted.')
+    return redirect('teams_list')
 
 
 def user_login(request):

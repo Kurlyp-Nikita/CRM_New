@@ -18,6 +18,7 @@
 
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'teams_list' %}">Teams</a></li>
                 <li><a href="{% url 'leads_list' %}">Leads</a></li>
                 <li><a href="{% url 'clients_list' %}">Clients</a></li>
                 <li class="myacc"><a href="{% url 'myaccount' %}">My account</a></li>

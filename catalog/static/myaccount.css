@@ -1,62 +1,65 @@
-/* Основной стиль для контейнера аккаунта */
+/* Контейнер аккаунта */
 .account-container {
-    width: 60%;
+    max-width: 600px;
     margin: 40px auto;
     padding: 20px;
     background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     color: #333;
-    text-align: center;
 }
 
 /* Заголовок */
 .account-container h1 {
-    font-size: 2.2rem;
-    color: #333;
+    font-size: 28px;
     margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: #333;
+    text-align: center;
 }
 
-/* Стиль для информации */
+/* Параграфы с информацией об аккаунте */
 .account-container p {
-    font-size: 1.1rem;
-    color: #555;
+    font-size: 18px;
     margin: 10px 0;
-    line-height: 1.6;
 }
 
+/* Выделение жирным для меток (Username, Team) */
 .account-container p strong {
-    color: #1abc9c;
+    color: #555;
 }
 
-/* Горизонтальная линия */
-.account-container hr {
-    border: 0;
-    height: 1px;
-    background-color: #ddd;
-    margin: 15px 0;
-}
-
-/* Кнопка Logout */
-.account-container .red {
-    display: inline-block;
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: bold;
+/* Ссылка для редактирования команды */
+.account-container p a {
+    color: #007bff;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+    font-size: 16px;
 }
 
-/* Hover-эффект для кнопки */
-.account-container .red:hover {
-    background-color: #c0392b;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(192, 57, 43, 0.6);
+.account-container p a:hover {
+    text-decoration: underline;
+}
+
+/* Разделительная линия */
+.account-container hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+/* Кнопка выхода */
+.account-container a.red {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #dc3545;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+.account-container a.red:hover {
+    background-color: #c82333;
 }
